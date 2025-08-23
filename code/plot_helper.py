@@ -108,7 +108,7 @@ class Plot_Helper:
         plt.legend(handles=[red_patch, green_patch], bbox_to_anchor=(1.05, 1), loc='upper left')
 
         plt.tight_layout(rect=[0, 0, 0.85, 1])
-        plt.savefig(os.path.join(self.plot_dir, "filename.svg"))
+        plt.savefig(os.path.join(self.plot_dir, "race_gender_mosaic.svg"))
         print("Saved intersectional_mosaic_plot.svg")
         plt.close('all')
 
@@ -201,7 +201,7 @@ class Plot_Helper:
         df = pd.DataFrame(_gen_dict)
         scaler = MinMaxScaler()
         df['mean_depth'] = scaler.fit_transform(df[['mean_depth']])
-        self._create_boxplots(data_df=df, xvalues=x_type, yvalues=y_type, ylabel=y_type, filename=f'{x_type}_{y_type}_boxplot.svg', title=f'{y_type}s distribution {x_type}', xlabel=x_type)
+        self._create_boxplots(data_df=df, xvalues=x_type, yvalues=y_type, ylabel=y_type.replace('_', ' ').title(), filename=f'{x_type}_{y_type}_boxplot.svg', title=f'{y_type.replace('_', ' ').title()}s distribution {x_type.replace('_', ' ').title()}', xlabel=x_type.replace('_', ' ').title())
 
     def create_heatmap(self, _gen_dict: dict, values: str, index: str, columns: str):
         """
@@ -214,7 +214,7 @@ class Plot_Helper:
             columns (str): Column categories.
         """
         df = pd.DataFrame(_gen_dict)
-        self._create_heatmap(data_df=df, values=values, index=index, columns=columns, ylabel=index, filename=f'{index}_{columns}_{values}_heatmap.svg', title=f'average {values} of {columns} and {index} combined', xlabel=columns)
+        self._create_heatmap(data_df=df, values=values, index=index, columns=columns, ylabel=index.replace('_', ' ').title(), filename=f'{index}_{columns}_{values}_heatmap.svg', title=f'average {values.replace('_', ' ').title()} of {columns.replace('_', ' ').title()} and {index.replace('_', ' ').title()} combined', xlabel=columns.replace('_', ' ').title())
 
     def create_multidimensional_heatmap(self, _gen_dict: dict, values: str, index: str, columns: str, grouping: str, low_count_threshold: int = 20):
         """
@@ -457,9 +457,9 @@ class Plot_Helper:
         type_counts = Counter(types)
         # Custom sort for age_range
         if type == Const.age_range:
-             type_labels = sorted(type_counts.keys(), key=lambda x: int(x.split('-')[0]) if '-' in x else x)
+            type_labels = sorted(type_counts.keys(), key=lambda x: int(x.split('-')[0]) if '-' in x else x)
         else:
-             type_labels = sorted(type_counts.keys())
+            type_labels = sorted(type_counts.keys())
 
 
         observed_type_dist = [type_counts[label] for label in type_labels]
@@ -477,7 +477,7 @@ class Plot_Helper:
             type_counts,
             {label: sum(observed_type_dist)/num_types for label in type_labels},
             type_labels,
-            f'{type} Distribution Comparison, js distance: {js_type:.4f}',
+            f'{type.replace('_', ' ').title()} Distribution Comparison, js distance: {js_type:.4f}',
             f'{type}_simpl_distribution_plot.svg'
         )
 
@@ -584,7 +584,7 @@ class Plot_Helper:
             observed_counts = plot_data[plot_data['Distribution'] == 'Observed'].set_index('Category')['count']
             normative_counts = plot_data[plot_data['Distribution'] == 'Normative'].set_index('Category')['count']
 
-             # Ensure both series have the same index for comparison
+            # Ensure both series have the same index for comparison
             all_categories = sorted(list(set(observed_counts.index) | set(normative_counts.index)))
             observed_counts = observed_counts.reindex(all_categories, fill_value=0)
             normative_counts = normative_counts.reindex(all_categories, fill_value=0)
