@@ -201,7 +201,7 @@ class Plot_Helper:
         df = pd.DataFrame(_gen_dict)
         scaler = MinMaxScaler()
         df['mean_depth'] = scaler.fit_transform(df[['mean_depth']])
-        self._create_boxplots(data_df=df, xvalues=x_type, yvalues=y_type, ylabel=y_type.replace('_', ' ').title(), filename=f'{x_type}_{y_type}_boxplot.svg', title=f'{y_type.replace('_', ' ').title()}s distribution {x_type.replace('_', ' ').title()}', xlabel=x_type.replace('_', ' ').title())
+        self._create_boxplots(data_df=df, xvalues=x_type, yvalues=y_type, ylabel=y_type.replace('_', ' ').title(), filename=f'{x_type}_{y_type}_boxplot.svg', title=f'{y_type.replace('_', ' ').title()} distribution {x_type.replace('_', ' ').title()}', xlabel=x_type.replace('_', ' ').title())
 
     def create_heatmap(self, _gen_dict: dict, values: str, index: str, columns: str):
         """

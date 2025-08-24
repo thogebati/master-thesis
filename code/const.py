@@ -23,7 +23,7 @@ class Const:
     age = 'age'  # Age attribute
     age_range = 'age_range'  # Age range attribute
     emotion = 'emotion'  # Emotion attribute
-    centrality = 'centrality'  # Centrality of face in image
+    centrality = 'distance_center'  # Centrality of face in image
     face_center_x = 'face_center_x'  # X coordinate of face center
     face_center_y = 'face_center_y'  # Y coordinate of face center
     race = 'race'  # Race attribute
