@@ -8,7 +8,7 @@ To initialize the workspace and download everything that is necessary to run the
 bash init.sh
 ```
 
-To make sure all necessary packages are installed, use the created virtual environment in the .venv folder when running the Jupyter Notebooks.
+To make sure all necessary packages are installed, use the in the init script created virtual environment in the .venv folder when running the Jupyter Notebooks.
 
 
 # Running the code to get the final results
@@ -29,7 +29,7 @@ Wait until the server is up and running.  
 Now you can run the ComfyUI client script:
 
 ```console
-bash scripts/create_img_comfy.sh $1
+bash scripts/create_img_comfy.sh <path to prompts>
 ```
 
 This script requires the path to the result CSV file that contains the prompts.  
@@ -41,7 +41,7 @@ With the image created, now the depth images and PFMs can be created.  
 To create the images, run the following script in a terminal:
 
 ```console
-bash scripts/run_midas.sh $1 $2
+bash scripts/run_midas.sh <path to image> <path to output>
 ```
 
 The first parameter should be the path to where the generated images are stored, and the second parameter should be the path to where the depth images should be stored.
